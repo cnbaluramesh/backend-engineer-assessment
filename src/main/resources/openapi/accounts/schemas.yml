@@ -1,6 +1,59 @@
 components:
   schemas:
+    createCustomer:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: "User's first name"
+          example: "John"
+          required: true
+        lastName:
+          type: string
+          description: "User's last name"
+          example: "Doe"
+          required: true
+        email:
+          type: string
+          description: "Email of user"
+          example: "john@doe.com"
+          required: true
+        providerType:
+          type: string
+          enum: [ STRIPE ]
+          description: "Provider type for the input"
+          example: "stripe"
+          required: true
+        providerId:
+          type: string
+          format: uuid
+          required: false
+          description: "Provider id for the user after signup"
     createAccount:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: "User's first name"
+          example: "John"
+          required: true
+        lastName:
+          type: string
+          description: "User's last name"
+          example: "Doe"
+          required: true
+        email:
+          type: string
+          description: "Email of user"
+          example: "john@doe.com"
+          required: true
+        providerType:
+          type: string
+          enum: [STRIPE]
+          description: "Provider type for the input"
+          example: "stripe"
+          required: true
+    updateAccount:
       type: object
       properties:
         firstName:
@@ -51,14 +104,84 @@ components:
           description: "Prospect last updated time"
           readOnly: true
           example: "2022-04-13T01:52:40.690387Z"
+        providerType:
+          type: string
+          enum: [Stripe]
+          description: "Provider type for the input"
+          example: "stripe"
+          required: true
+        providerId:
+          type: string
+          description: "Provider id for the input"
+          example: "1acc23"
+          required: true
       example:
         - id: usr_fba5b240-0e68-4e64-aca6-f12022dc4be3
           firstName: "John"
           lastName: "Doe"
           creationAt: "2022-04-13T01:52:40.690387Z"
           updatedAt: "2022-04-13T01:52:40.690387Z"
+          providerType: "stripe"
+          providerId: "acc123"
+    customer:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: "User's ID"
+          readOnly: true
+          example: "fba5b240-0e68-4e64-aca6-f12022dc4be3"
+        firstName:
+          type: string
+          description: "User's first name"
+          example: "John"
+        lastName:
+          type: string
+          description: "User's last name"
+          example: "Doe"
+        email:
+          type: string
+          description: "Email of user"
+          example: "john@doe.com"
+        createdAt:
+          type: string
+          format: date-time
+          description: "Prospect creation time"
+          readOnly: true
+          example: "2022-04-13T01:52:40.690387Z"
+        updatedAt:
+          type: string
+          format: date-time
+          description: "Prospect last updated time"
+          readOnly: true
+          example: "2022-04-13T01:52:40.690387Z"
+        providerType:
+          type: string
+          enum: [ Stripe ]
+          description: "Provider type for the input"
+          example: "stripe"
+          required: true
+        providerId:
+          type: string
+          description: "Provider id for the input"
+          example: "1acc23"
+          required: true
+      example:
+        - id: usr_fba5b240-0e68-4e64-aca6-f12022dc4be3
+          firstName: "John"
+          lastName: "Doe"
+          creationAt: "2022-04-13T01:52:40.690387Z"
+          updatedAt: "2022-04-13T01:52:40.690387Z"
+          providerType: "stripe"
+          providerId: "acc123"
 
     accounts:
       type: array
       items:
         $ref: "#/components/schemas/account"
+
+    customers:
+      type: array
+      items:
+        $ref: "#/components/schemas/customer"

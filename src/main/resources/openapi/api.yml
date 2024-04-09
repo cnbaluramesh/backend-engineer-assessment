@@ -12,6 +12,8 @@ servers:
 tags:
   - name: Accounts
     description: Create and manage user and attach payment providers such as 'stripe'.
+  - name: Customers
+    description: Create a new customer and attach payment providers such as 'stripe'.
 
 components:
   securitySchemes:
@@ -23,6 +25,10 @@ components:
 paths:
   /accounts:
     $ref: "./accounts/paths/accounts.yml"
+  /customers:
+    $ref: "./accounts/paths/customer.yml"
+  /accounts/{accountId}:
+    $ref: "./accounts/paths/account.yml"
 
 security:
   - bearerAuth: [ ]

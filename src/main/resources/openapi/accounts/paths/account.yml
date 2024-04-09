@@ -1,0 +1,35 @@
+summary: Accounts
+patch:
+  summary: Update an account
+  operationId: updateAccount
+  description: Use this endpoint to update an existing account.
+  parameters:
+    - name: accountId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+      description: The uuid of a specific account
+  requestBody:
+    description: User account details
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../schemas.yml#/components/schemas/updateAccount"
+  responses:
+    "201":
+      description: User account updated
+      content:
+        application/json:
+          schema:
+            type: string
+    "400":
+      $ref: "../../common/responses.yml#/components/responses/badRequest"
+    "401":
+      $ref: "../../common/responses.yml#/components/responses/unauthorized"
+    "403":
+      $ref: "../../common/responses.yml#/components/responses/forbidden"
+    "500":
+      $ref: "../../common/responses.yml#/components/responses/internalServerError"

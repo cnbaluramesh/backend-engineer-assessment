@@ -7,3 +7,14 @@ services:
       - 'POSTGRES_USER=myuser'
     ports:
       - '5432'
+
+  appservice:
+    build: .
+    depends_on:
+      - postgres
+    environment:
+      - spring.datasource.url=jdbc:postgresql://postgres:5432/mydatabase?createDatabaseIfNotExist=true
+      - spring.datasource.username=myuser
+      - spring.datasource.password=secret
+    ports:
+      - 8080:9292

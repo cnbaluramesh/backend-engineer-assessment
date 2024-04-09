@@ -12,6 +12,8 @@ public interface AccountService {
    */
   Account createAccount(Account details);
 
+  String updateAccount(Account details);
+
   /**
    * getAccounts returns a list of accounts.
    *

@@ -1,0 +1,30 @@
+summary: Customer
+
+post:
+  summary: Create a new user Customer
+  operationId: createCustomer
+  description: Creates a new customer with the given details and attaches a supported payment provider such as 'stripe'.
+  tags:
+    - Accounts
+  requestBody:
+    description: Customer details
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../schemas.yml#/components/schemas/createCustomer"
+  responses:
+    "201":
+      description: Customer signup completed.
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas.yml#/components/schemas/customer"
+    "400":
+      $ref: "../../common/responses.yml#/components/responses/badRequest"
+    "401":
+      $ref: "../../common/responses.yml#/components/responses/unauthorized"
+    "403":
+      $ref: "../../common/responses.yml#/components/responses/forbidden"
+    "500":
+      $ref: "../../common/responses.yml#/components/responses/internalServerError"
